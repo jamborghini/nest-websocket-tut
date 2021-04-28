@@ -1,9 +1,32 @@
-import { SubscribeMessage, WebSocketGateway } from '@nestjs/websockets';
+import {
+  MessageBody,
+  SubscribeMessage,
+  WebSocketGateway,
+  WebSocketServer,
+} from '@nestjs/websockets';
+import {Server, Socket} from 'socket.io';
+
+export interface TypingUser {
+  username: string;
+}
 
 @WebSocketGateway()
 export class ChatGateway {
+  @WebSocketServer()
+  private server: Server;
+
   @SubscribeMessage('message')
-  handleMessage(client: any, payload: any): string {
-    return 'Hello world!';
+  handleMessage(@MessageBody() message: Record<any, any>): void {
+    this.server.emit('message', message);
+  }
+
+  @SubscribeMessage('typingStart')
+  handleTypingStart(client: Socket, typing: TypingUser): void {
+    client.broadcast.emit('typingStart', typing);
+  }
+
+  @SubscribeMessage('typingStop')
+  handleTypingStop(client: Socket, typing: TypingUser): void {
+    client.broadcast.emit('typingStop', typing);
   }
 }
