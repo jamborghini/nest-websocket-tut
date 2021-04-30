@@ -20,13 +20,8 @@ export class ChatGateway {
     this.server.emit('message', message);
   }
 
-  @SubscribeMessage('typingStart')
-  handleTypingStart(client: Socket, typing: TypingUser): void {
-    client.broadcast.emit('typingStart', typing);
-  }
-
-  @SubscribeMessage('typingStop')
-  handleTypingStop(client: Socket, typing: TypingUser): void {
-    client.broadcast.emit('typingStop', typing);
+  @SubscribeMessage('typing')
+  handleTypingStart(client: Socket, data: TypingUser): void {
+    client.broadcast.emit('typing', data);
   }
 }
