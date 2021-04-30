@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ChatModule } from './module/chat/chat.module';
+import { WebsocketModule } from 'src/module/websocket/websocket.module';
 
 @Module({
-  imports: [ChatModule],
+  imports: [WebsocketModule],
   controllers: [AppController],
   providers: [AppService],
 })
