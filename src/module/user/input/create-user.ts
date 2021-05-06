@@ -5,6 +5,7 @@ import { Match } from 'src/module/decorator/validator/match';
 import { Storage } from 'src/module/user/module/storage/model/storage';
 import { ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
+import { Settings } from 'src/module/user/module/settings/model/settings';
 
 @InputType()
 export class CreateUser {
@@ -24,4 +25,11 @@ export class CreateUser {
   @Type(() => Storage)
   @ValidateNested()
   storage: Pick<Storage, 'lastMessage'> = { lastMessage: 'Pin some messages!' };
+
+  @Type(() => Settings)
+  @ValidateNested({ each: true })
+  settings: Pick<Settings, 'notifications' | 'chatColor'> = {
+    notifications: false,
+    chatColor: '#4caf50',
+  };
 }

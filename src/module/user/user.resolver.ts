@@ -13,6 +13,7 @@ import { plainToClass, plainToClassFromExist } from 'class-transformer';
 import { UpdateUser } from 'src/module/user/input/update-user';
 import { DeleteUser } from 'src/module/user/input/delete-user';
 import { Storage } from 'src/module/user/module/storage/model/storage';
+import { Settings } from 'src/module/user/module/settings/model/settings';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -48,5 +49,10 @@ export class UserResolver {
   @ResolveField(() => Storage)
   async storage(@Parent() user: User): Promise<Storage> {
     return Storage.findOne({ user });
+  }
+
+  @ResolveField(() => Settings)
+  async settings(@Parent() user: User): Promise<Settings> {
+    return Settings.findOne({ user });
   }
 }
