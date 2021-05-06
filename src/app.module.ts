@@ -15,6 +15,7 @@ import { UserModule } from 'src/module/user/user.module';
       database: 'temp',
       entities: ['dist/**/model/*.{ts,js}'],
       synchronize: true,
+      dropSchema: true,
     }),
     WebsocketModule,
     UserModule,
