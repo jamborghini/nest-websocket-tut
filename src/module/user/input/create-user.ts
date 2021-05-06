@@ -15,6 +15,6 @@ export class CreateUser {
 
   @Field()
   @IsPassword()
-  @Match('password')
+  @Match('password', { message: 'Passwords must match' })
   confirmPassword: string;
 }
