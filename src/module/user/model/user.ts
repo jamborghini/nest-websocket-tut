@@ -1,5 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { BeforeInsert, Column, Entity, JoinColumn, OneToOne } from 'typeorm';
+import { BeforeInsert, Column, Entity, Index, OneToOne } from 'typeorm';
 import { Substructure } from 'src/module/shared/model/substructure';
 import { Role } from 'src/module/user/model/enum/role';
 import { hash } from 'bcrypt';
@@ -7,6 +7,7 @@ import { Storage } from 'src/module/user/module/storage/model/storage';
 
 @ObjectType()
 @Entity()
+@Index(['username'], { unique: true })
 export class User extends Substructure {
   @Field()
   @Column()
@@ -20,8 +21,8 @@ export class User extends Substructure {
   @Column({ type: 'enum', enum: Role, default: Role.User })
   role: Role;
 
-  @OneToOne(() => Storage, (storage) => storage.user)
-  @JoinColumn()
+  @Field(() => Storage)
+  @OneToOne(() => Storage, (storage) => storage.user, { cascade: true })
   storage: Storage;
 
   toJSON() {
