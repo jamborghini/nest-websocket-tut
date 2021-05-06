@@ -11,7 +11,7 @@ export function IsPassword(
 ): PropertyDecorator {
   return applyDecorators(
     Matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,255}$/,
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,255}$/,
       {
         message: 'Password can only contain valid characters',
         ...validationOptions,
