@@ -40,7 +40,7 @@ export class UserResolver {
   @Mutation(() => User)
   async deleteUser(@Payload() payload: DeleteUser): Promise<User> {
     const user = await User.findOneOrFail(payload.id, {
-      loadRelationIds: true,
+      relations: ['storage'],
     });
     return user.softRemove();
   }

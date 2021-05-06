@@ -7,17 +7,17 @@ import { IsOptional } from 'class-validator';
 
 @InputType()
 export class UpdateUser extends UpdateModel {
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsUsername()
   username: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsPassword()
   password: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsOptional()
   @IsPassword()
   @Match('password')

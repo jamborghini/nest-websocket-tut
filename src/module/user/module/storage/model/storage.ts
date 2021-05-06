@@ -10,8 +10,8 @@ export class Storage extends Substructure {
   @Column()
   lastMessage: string;
 
-  @Field(() => User)
-  @OneToOne(() => User, (user) => user.storage)
+  @Field(() => User, { nullable: false })
+  @OneToOne(() => User, (user) => user.storage, { nullable: false })
   @JoinColumn()
   user: User;
 }

@@ -4,7 +4,7 @@ import { IsOptional, Length } from 'class-validator';
 
 @InputType()
 export class UpdateStorage extends UpdateModel {
-  @Field()
+  @Field({ nullable: true })
   @Length(1, 2000)
   @IsOptional()
   lastMessage: string;

@@ -6,7 +6,7 @@ type Storage {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  deletedAt: DateTime
+  deletedAt: DateTime!
   lastMessage: String!
   user: User!
 }
@@ -20,7 +20,7 @@ type User {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  deletedAt: DateTime
+  deletedAt: DateTime!
   username: String!
   password: String!
   role: Role!
@@ -44,9 +44,7 @@ type Mutation {
   createUser(payload: CreateUser!): User!
   updateUser(payload: UpdateUser!): User!
   deleteUser(payload: DeleteUser!): User!
-  createStorage(payload: CreateStorage!): Storage!
   updateStorage(payload: UpdateStorage!): Storage!
-  deleteStorage(payload: DeleteStorage!): Storage!
 }
 
 input CreateUser {
@@ -57,29 +55,16 @@ input CreateUser {
 
 input UpdateUser {
   id: ID!
-  username: String!
-  password: String!
-  confirmPassword: String!
+  username: String
+  password: String
+  confirmPassword: String
 }
 
 input DeleteUser {
   id: ID!
 }
 
-input CreateStorage {
-  lastMessage: String!
-  user: DocumentRefInput!
-}
-
-input DocumentRefInput {
-  id: ID!
-}
-
 input UpdateStorage {
   id: ID!
-  lastMessage: String!
-}
-
-input DeleteStorage {
-  id: ID!
+  lastMessage: String
 }

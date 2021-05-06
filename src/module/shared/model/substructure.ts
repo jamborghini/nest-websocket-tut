@@ -25,10 +25,10 @@ export class Substructure extends BaseEntity {
   createdAt: Date;
 
   @Field()
-  @UpdateDateColumn()
-  updatedAt: Date;
+  @UpdateDateColumn({ nullable: true })
+  updatedAt: Date = null;
 
-  @Field({ nullable: true })
+  @Field()
   @DeleteDateColumn()
   deletedAt: Date;
 

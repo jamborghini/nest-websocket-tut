@@ -1,5 +1,12 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { BeforeInsert, Column, Entity, Index, OneToOne } from 'typeorm';
+import {
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  Entity,
+  Index,
+  OneToOne,
+} from 'typeorm';
 import { Substructure } from 'src/module/shared/model/substructure';
 import { Role } from 'src/module/user/model/enum/role';
 import { hash } from 'bcrypt';
@@ -31,6 +38,7 @@ export class User extends Substructure {
   }
 
   @BeforeInsert()
+  @BeforeUpdate()
   private async hashPassword() {
     this.password = await hash(this.password, 14);
   }
