@@ -12,6 +12,7 @@ import { Role } from 'src/module/user/model/enum/role';
 import { hash } from 'bcrypt';
 import { Storage } from 'src/module/user/module/storage/model/storage';
 import { Settings } from 'src/module/user/module/settings/model/settings';
+import { Profile } from 'src/module/user/module/profile/model/profile';
 
 @ObjectType()
 @Entity()
@@ -36,6 +37,10 @@ export class User extends Substructure {
   @Field(() => Settings)
   @OneToOne(() => Settings, (settings) => settings.user, { cascade: true })
   settings: Settings;
+
+  @Field(() => Profile)
+  @OneToOne(() => Profile, (profile) => profile.user, { cascade: true })
+  profile: Profile;
 
   toJSON() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

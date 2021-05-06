@@ -6,6 +6,13 @@ import { Storage } from 'src/module/user/module/storage/model/storage';
 import { ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { Settings } from 'src/module/user/module/settings/model/settings';
+import { Profile } from 'src/module/user/module/profile/model/profile';
+import {
+  adjectives,
+  animals,
+  colors,
+  uniqueNamesGenerator,
+} from 'unique-names-generator';
 
 @InputType()
 export class CreateUser {
@@ -27,9 +34,17 @@ export class CreateUser {
   storage: Pick<Storage, 'lastMessage'> = { lastMessage: 'Pin some messages!' };
 
   @Type(() => Settings)
-  @ValidateNested({ each: true })
+  @ValidateNested()
   settings: Pick<Settings, 'notifications' | 'chatColor'> = {
     notifications: false,
     chatColor: '#4caf50',
+  };
+
+  @Type(() => Profile)
+  @ValidateNested()
+  profile: Pick<Profile, 'nickname'> = {
+    nickname: uniqueNamesGenerator({
+      dictionaries: [adjectives, colors, animals],
+    }),
   };
 }
