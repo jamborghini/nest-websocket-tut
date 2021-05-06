@@ -14,7 +14,7 @@ export function IsUsername(
       message: 'Username can only contain letters and digits',
       ...validationOptions,
     }),
-    MinLength(3, validationOptions),
+    MinLength(2, validationOptions),
     MaxLength(32, validationOptions),
   );
 }
