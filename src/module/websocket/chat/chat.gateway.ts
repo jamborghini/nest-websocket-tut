@@ -13,16 +13,13 @@ export class ChatGateway implements OnModuleInit {
   private server: Server;
 
   onModuleInit(): void {
+    console.log('inited');
     this.server.on('connection', (data) => {
-      this.server.emit(
-        ChatEvent.CLIENT_COUNT,
-        data.conn.server.clientsCount - 1,
-      );
+      this.server.emit(ChatEvent.CLIENT_COUNT, data.conn.server.clientsCount);
+      console.log('Client count: ' + data.conn.server.clientsCount);
       data.on('disconnect', () => {
-        this.server.emit(
-          ChatEvent.CLIENT_COUNT,
-          data.conn.server.clientsCount - 1,
-        );
+        this.server.emit(ChatEvent.CLIENT_COUNT, data.conn.server.clientsCount);
+        console.log('Client count: ' + data.conn.server.clientsCount);
       });
     });
   }
