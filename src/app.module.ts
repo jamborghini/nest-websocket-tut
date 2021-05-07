@@ -18,11 +18,11 @@ import { UserModule } from 'src/module/user/user.module';
     //   dropSchema: true,
     // }),
     WebsocketModule,
-    UserModule,
-    GraphQLModule.forRoot({
-      autoSchemaFile: 'schema.gql',
-      fieldResolverEnhancers: ['guards'],
-    }),
+    // UserModule,
+    // GraphQLModule.forRoot({
+    //   autoSchemaFile: 'schema.gql',
+    //   fieldResolverEnhancers: ['guards'],
+    // }),
   ],
   controllers: [],
   providers: [],
