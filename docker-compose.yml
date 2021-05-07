@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  temp:
+    build:
+      context: .
+      target: temp
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - 9229:9229
+      - 5432:5432
+    command: npm run start:dev
+    networks:
+      - webnet
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:13-alpine
+    networks:
+      - webnet
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: temp
+    ports:
+      - 5432:5432
+networks:
+  webnet:
